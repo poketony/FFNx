@@ -43,10 +43,6 @@ jobs:
         git config --global core.longpaths true
     - name: Checkout
       uses: actions/checkout@v4.1.0
-    - name: Install WinGet
-      uses: Cyberboss/install-winget@v1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build
       run: ".github/workflows/build.ps1"
       shell: pwsh
