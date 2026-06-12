@@ -17,7 +17,6 @@
         "swresample",
         "swscale",
         "amf",
-        "nvcodec",
         "opencl",
         "qsv",
         "gpl",

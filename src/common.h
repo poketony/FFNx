@@ -5,7 +5,7 @@
 //    Copyright (C) 2020 myst6re                                            //
 //    Copyright (C) 2020 Chris Rizzitello                                   //
 //    Copyright (C) 2020 John Pritchard                                     //
-//    Copyright (C) 2026 Julian Xhokaxhiu                                   //
+//    Copyright (C) 2024 Julian Xhokaxhiu                                   //
 //    Copyright (C) 2023 Cosmos                                             //
 //                                                                          //
 //    This file is part of FFNx                                             //
@@ -34,6 +34,7 @@
 #define VERSION_FF7_102_FR          2
 #define VERSION_FF7_102_DE          3
 #define VERSION_FF7_102_SP          4
+#define VERSION_FF7_102_JP         19
 #define VERSION_FF8_12_US           5
 #define VERSION_FF8_12_US_NV        6
 #define VERSION_FF8_12_FR           7
@@ -240,7 +241,7 @@ struct common_externals
 	uint32_t set_midi_volume_fade;
 	uint32_t set_midi_tempo;
 	uint32_t remember_midi_playing_time;
-	uint32_t draw_graphics_object;
+	int (*draw_graphics_object)(int n_shape, graphics_object *graphics_object);
 	char *font_info;
 	uint32_t build_dialog_window;
 	uint32_t write_file;

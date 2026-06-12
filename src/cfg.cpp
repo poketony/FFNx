@@ -97,6 +97,52 @@ bool mdef_fix;
 long enable_antialiasing;
 bool enable_anisotropic;
 bool enable_bilinear;
+bool enable_sdf_fonts;
+float sdf_pixel_range;
+float sdf_thickness;
+float sdf_shadow_offset;
+float sdf_shadow_opacity;
+
+// SDF Extended Parameters
+float sdf_shadow_offset_x;
+float sdf_shadow_offset_y;
+float sdf_shadow_blur;
+float sdf_outline_width;
+float sdf_outline_opacity;
+float sdf_inner_outline_width;
+float sdf_inner_outline_opacity;
+float sdf_glow_radius;
+float sdf_glow_intensity;
+
+// SDF Colors
+bool sdf_text_color_enable;
+float sdf_text_color_r;
+float sdf_text_color_g;
+float sdf_text_color_b;
+float sdf_shadow_color_r;
+float sdf_shadow_color_g;
+float sdf_shadow_color_b;
+float sdf_outline_color_r;
+float sdf_outline_color_g;
+float sdf_outline_color_b;
+float sdf_inner_outline_color_r;
+float sdf_inner_outline_color_g;
+float sdf_inner_outline_color_b;
+float sdf_glow_color_r;
+float sdf_glow_color_g;
+float sdf_glow_color_b;
+
+// SDF Transforms
+float sdf_italic_slant;
+float sdf_skew_x;
+float sdf_skew_y;
+
+// SDF Animations
+float sdf_anim_speed;
+bool sdf_color_cycle_enable;
+bool sdf_pulse_enable;
+float sdf_cycle_offset;
+
 bool enable_lighting;
 bool prefer_lighting_cpu_calculations;
 long game_lighting;
@@ -159,6 +205,16 @@ long ffmpeg_video_volume;
 bool ff7_advanced_blinking;
 long display_index;
 long ff8_high_res_font;
+bool char_portrait_anim_enable;
+bool title_video_enable;
+std::string title_video_path;
+bool title_video_loop;
+float title_video_audio;
+bool title_video_progress_based;
+std::string title_video_early_game;
+std::string title_video_world_map;
+std::string title_video_meteor;
+std::string title_video_final;
 
 std::vector<std::string> get_string_or_array_of_strings(const toml::node_view<toml::node> &node)
 {
@@ -264,6 +320,52 @@ void read_cfg()
 	enable_antialiasing = config["enable_antialiasing"].value_or(0);
 	enable_anisotropic = config["enable_anisotropic"].value_or(true);
 	enable_bilinear = config["enable_bilinear"].value_or(false);
+	enable_sdf_fonts = config["enable_sdf_fonts"].value_or(false);
+	sdf_pixel_range = config["sdf_pixel_range"].value_or(4.0);
+	sdf_thickness = config["sdf_thickness"].value_or(0.5);
+	sdf_shadow_offset = config["sdf_shadow_offset"].value_or(1.0);
+	sdf_shadow_opacity = config["sdf_shadow_opacity"].value_or(0.5);
+
+	// SDF Extended Parameters
+	sdf_shadow_offset_x = config["sdf_shadow_offset_x"].value_or(1.0);
+	sdf_shadow_offset_y = config["sdf_shadow_offset_y"].value_or(1.0);
+	sdf_shadow_blur = config["sdf_shadow_blur"].value_or(0.0);
+	sdf_outline_width = config["sdf_outline_width"].value_or(0.0);
+	sdf_outline_opacity = config["sdf_outline_opacity"].value_or(1.0);
+	sdf_inner_outline_width = config["sdf_inner_outline_width"].value_or(0.0);
+	sdf_inner_outline_opacity = config["sdf_inner_outline_opacity"].value_or(1.0);
+	sdf_glow_radius = config["sdf_glow_radius"].value_or(0.0);
+	sdf_glow_intensity = config["sdf_glow_intensity"].value_or(0.0);
+
+	// SDF Colors
+	sdf_text_color_enable = config["sdf_text_color_enable"].value_or(false);
+	sdf_text_color_r = config["sdf_text_color_r"].value_or(1.0);
+	sdf_text_color_g = config["sdf_text_color_g"].value_or(1.0);
+	sdf_text_color_b = config["sdf_text_color_b"].value_or(1.0);
+	sdf_shadow_color_r = config["sdf_shadow_color_r"].value_or(0.0);
+	sdf_shadow_color_g = config["sdf_shadow_color_g"].value_or(0.0);
+	sdf_shadow_color_b = config["sdf_shadow_color_b"].value_or(0.0);
+	sdf_outline_color_r = config["sdf_outline_color_r"].value_or(1.0);
+	sdf_outline_color_g = config["sdf_outline_color_g"].value_or(1.0);
+	sdf_outline_color_b = config["sdf_outline_color_b"].value_or(1.0);
+	sdf_inner_outline_color_r = config["sdf_inner_outline_color_r"].value_or(1.0);
+	sdf_inner_outline_color_g = config["sdf_inner_outline_color_g"].value_or(1.0);
+	sdf_inner_outline_color_b = config["sdf_inner_outline_color_b"].value_or(1.0);
+	sdf_glow_color_r = config["sdf_glow_color_r"].value_or(1.0);
+	sdf_glow_color_g = config["sdf_glow_color_g"].value_or(0.5);
+	sdf_glow_color_b = config["sdf_glow_color_b"].value_or(0.0);
+
+	// SDF Transforms
+	sdf_italic_slant = config["sdf_italic_slant"].value_or(0.0);
+	sdf_skew_x = config["sdf_skew_x"].value_or(0.0);
+	sdf_skew_y = config["sdf_skew_y"].value_or(0.0);
+
+	// SDF Animations
+	sdf_anim_speed = config["sdf_anim_speed"].value_or(1.0);
+	sdf_color_cycle_enable = config["sdf_color_cycle_enable"].value_or(false);
+	sdf_pulse_enable = config["sdf_pulse_enable"].value_or(false);
+	sdf_cycle_offset = config["sdf_cycle_offset"].value_or(10.0);
+
 	enable_lighting = config["enable_lighting"].value_or(false);
 	prefer_lighting_cpu_calculations = config["prefer_lighting_cpu_calculations"].value_or(true);
 	game_lighting = config["game_lighting"].value_or(GAME_LIGHTING_PER_VERTEX);
@@ -327,6 +429,16 @@ void read_cfg()
 	ff7_advanced_blinking = config["ff7_advanced_blinking"].value_or(false);
 	display_index = config["display_index"].value_or(-1);
 	ff8_high_res_font = config["ff8_high_res_font"].value_or(-1);
+	char_portrait_anim_enable = config["char_portrait_anim_enable"].value_or(true);
+	title_video_enable = config["title_video_enable"].value_or(true);
+	title_video_path = config["title_video_path"].value_or("movies/title_cinematic.mp4");
+	title_video_loop = config["title_video_loop"].value_or(true);
+	title_video_audio = config["title_video_audio"].value_or(0.0f);
+	title_video_progress_based = config["title_video_progress_based"].value_or(true);
+	title_video_early_game = config["title_video_early_game"].value_or("movies/title_midgar.mp4");
+	title_video_world_map = config["title_video_world_map"].value_or("movies/title_world.mp4");
+	title_video_meteor = config["title_video_meteor"].value_or("movies/title_meteor.mp4");
+	title_video_final = config["title_video_final"].value_or("movies/title_final.mp4");
 
 	// Windows x or y size can't be less then 0
 	if (window_size_x < 0) window_size_x = 0;

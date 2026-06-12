@@ -142,6 +142,9 @@ uint32_t ff7_2026_rerelease = false;
 // global FF7 flag, check if is japanese edition ( detected as US )
 uint32_t ff7_japanese_edition = false;
 
+// FF7 active language: "en", "ja", "de", "fr", "es"
+std::string ff7_language = "en";
+
 // window dimensions requested by the game, normally 640x480
 uint32_t game_width;
 uint32_t game_height;
@@ -3090,14 +3093,14 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 
 				if (strstr(basedir, "workingdir") != NULL)
 				{
-					if (fileExists("../../goggame-1698970154.info"))
-						ffnx_trace("Detected GOG edition.\n");
-					else if (fileExists("../../steam_api64.dll"))
+					if (fileExists("../../steam_api64.dll"))
 					{
 						ff7_steam_rerelease_edition = true;
 
 						ffnx_trace("Detected Steam Rerelease edition.\n");
 					}
+					else if(fileExists("../../goggame-1698970154.info"))
+						ffnx_trace("Detected GOG edition.\n");
 					else
 						ffnx_trace("Detected Windows Store edition.\n");
 

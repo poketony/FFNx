@@ -108,6 +108,52 @@ extern bool mdef_fix;
 extern long enable_antialiasing;
 extern bool enable_anisotropic;
 extern bool enable_bilinear;
+extern bool enable_sdf_fonts;
+extern float sdf_pixel_range;
+extern float sdf_thickness;
+extern float sdf_shadow_offset;
+extern float sdf_shadow_opacity;
+
+// SDF Extended Parameters (for debug overlay)
+extern float sdf_shadow_offset_x;
+extern float sdf_shadow_offset_y;
+extern float sdf_shadow_blur;
+extern float sdf_outline_width;
+extern float sdf_outline_opacity;
+extern float sdf_inner_outline_width;
+extern float sdf_inner_outline_opacity;
+extern float sdf_glow_radius;
+extern float sdf_glow_intensity;
+
+// SDF Colors
+extern bool sdf_text_color_enable;
+extern float sdf_text_color_r;
+extern float sdf_text_color_g;
+extern float sdf_text_color_b;
+extern float sdf_shadow_color_r;
+extern float sdf_shadow_color_g;
+extern float sdf_shadow_color_b;
+extern float sdf_outline_color_r;
+extern float sdf_outline_color_g;
+extern float sdf_outline_color_b;
+extern float sdf_inner_outline_color_r;
+extern float sdf_inner_outline_color_g;
+extern float sdf_inner_outline_color_b;
+extern float sdf_glow_color_r;
+extern float sdf_glow_color_g;
+extern float sdf_glow_color_b;
+
+// SDF Transforms
+extern float sdf_italic_slant;
+extern float sdf_skew_x;
+extern float sdf_skew_y;
+
+// SDF Animations
+extern float sdf_anim_speed;
+extern bool sdf_color_cycle_enable;
+extern bool sdf_pulse_enable;
+extern float sdf_cycle_offset;
+
 extern bool enable_lighting;
 extern bool prefer_lighting_cpu_calculations;
 extern long game_lighting;
@@ -171,5 +217,15 @@ extern long ffmpeg_video_volume;
 extern bool ff7_advanced_blinking;
 extern long display_index;
 extern long ff8_high_res_font;
+extern bool char_portrait_anim_enable;
+extern bool title_video_enable;
+extern std::string title_video_path;
+extern bool title_video_loop;
+extern float title_video_audio;
+extern bool title_video_progress_based;
+extern std::string title_video_early_game;
+extern std::string title_video_world_map;
+extern std::string title_video_meteor;
+extern std::string title_video_final;
 
 void read_cfg();

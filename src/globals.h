@@ -22,6 +22,7 @@
 #pragma once
 
 #include <mimalloc-new-delete.h>
+#include <string>
 #include <windows.h>
 #include <toml++/toml.h>
 
@@ -55,6 +56,7 @@ extern uint32_t steam_stock_launcher;
 extern uint32_t estore_edition;
 extern uint32_t ff7_2026_rerelease;
 extern uint32_t ff7_japanese_edition;
+extern std::string ff7_language;  // Language code: "en", "ja", "de", "fr", "es"
 extern uint32_t ff7_do_reset;
 
 #define BASEDIR_LENGTH 512

@@ -1,18 +1,19 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d623860b..8b657d5e 100644
+index f34fe127..539deb44 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,4 +1,5 @@
  cmake_minimum_required(VERSION 3.6)
 +cmake_policy(SET CMP0091 NEW)
  project(vgmstream NONE)
- 
+
  if(CMAKE_SYSTEM_NAME MATCHES Darwin)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 65768024..31d0b762 100644
+index 3e707614..f653a75e 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -105,3 +105,30 @@ if(BUILD_SHARED_LIBS)
+@@ -104,4 +104,31 @@ if(NOT EMSCRIPTEN)
+ 		FILES "${CMAKE_CURRENT_BINARY_DIR}/vgmstream-config.cmake"
  		DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/vgmstream
  	)
  endif()
@@ -44,11 +45,11 @@ index 65768024..31d0b762 100644
 +	install( FILES ${CMAKE_CURRENT_SOURCE_DIR}/coding/g72x_state.h DESTINATION include/libvgmstream/coding )
 +endif()
 diff --git a/src/base/streamfile_stdio.c b/src/base/streamfile_stdio.c
-index 4548bd5e..a4246075 100644
+index 948f5ffc..a3dc25b0 100644
 --- a/src/base/streamfile_stdio.c
 +++ b/src/base/streamfile_stdio.c
-@@ -281,7 +281,10 @@ static STREAMFILE* open_stdio_streamfile_buffer_by_file(FILE* infile, const char
- 
+@@ -264,7 +264,10 @@ static STREAMFILE* open_stdio_streamfile_buffer_by_file(FILE* infile, const char
+
      this_sf->name_len = strlen(filename);
      if (this_sf->name_len >= sizeof(this_sf->name))
 +    {
@@ -57,10 +58,10 @@ index 4548bd5e..a4246075 100644
 +    }
      memcpy(this_sf->name, filename, this_sf->name_len);
      this_sf->name[this_sf->name_len] = '\0';
- 
-@@ -321,6 +324,7 @@ static STREAMFILE* open_stdio_streamfile_buffer_by_file(FILE* infile, const char
+
+@@ -304,6 +307,7 @@ static STREAMFILE* open_stdio_streamfile_buffer_by_file(FILE* infile, const char
      return &this_sf->vt;
- 
+
  fail:
 +    vgm_logi("STREAMFILE: could not allocate stream because of memory exhaustion.\n");
      free(buf);
